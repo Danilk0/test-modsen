@@ -11,6 +11,6 @@ Starting app:
 - If you have docker, execute this command ```docker-compose up```
 
 Endpoints:
-- http://localhost:8090/place - working with places 
-- http://localhost:8090/organizer - working with organizers
-- http://localhost:8090 - working with events
+- http://localhost:8080/place - working with places 
+- http://localhost:8080/organizer - working with organizers
+- http://localhost:8080 - working with events
