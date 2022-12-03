@@ -1,18 +1,13 @@
-package com.example.demomodsen.integration.database.repository;
+package com.example.demomodsen.integration.repository;
 
 import com.example.demomodsen.database.entity.Event;
-import com.example.demomodsen.database.entity.Organizer;
-import com.example.demomodsen.database.entity.Place;
 import com.example.demomodsen.database.repository.EventRepository;
 import com.example.demomodsen.dto.EventFilter;
 import com.example.demomodsen.integration.IntegrationTestBase;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +25,7 @@ class EventRepositoryTest extends IntegrationTestBase {
     }
 
     @Test
-    void save() {
+    void checkEventSaving() {
         Event event= Event.builder()
                 .title("java")
                 .desc("java meetup")
@@ -42,7 +37,7 @@ class EventRepositoryTest extends IntegrationTestBase {
     }
 
     @Test
-    void delete() {
+    void checkEventRemoving() {
         Optional<Event> maybeEvent = eventRepository.findById(1);
         assertTrue(maybeEvent.isPresent());
         maybeEvent.ifPresent(event-> eventRepository.delete(event.getId()));
@@ -50,7 +45,7 @@ class EventRepositoryTest extends IntegrationTestBase {
     }
 
     @Test
-    void update() {
+    void checkEventEditing() {
         Event event= Event.builder()
                 .title("java")
                 .desc("java meetup")
@@ -74,7 +69,7 @@ class EventRepositoryTest extends IntegrationTestBase {
     }
 
     @Test
-    void findById() {
+    void checkSearchEventById() {
         Optional<Event> actualResult = (eventRepository.findById(1));
         assertTrue(actualResult.isPresent());
         actualResult.ifPresent(result -> {
@@ -89,13 +84,13 @@ class EventRepositoryTest extends IntegrationTestBase {
     }
 
     @Test
-    void findAll() {
+    void checkSearchAllEvents() {
         List<Event> events = eventRepository.findAll();
         assertThat(events).hasSize(2);
     }
 
     @Test
-    void findAllByFilter() {
+    void checkSearchAllEventsByFilter() {
         List<Event> events = eventRepository.findAllByFilter(new EventFilter("Java", "", null));
         assertThat(events).hasSize(1);
     }

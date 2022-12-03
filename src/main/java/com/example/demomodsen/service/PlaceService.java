@@ -6,7 +6,6 @@ import com.example.demomodsen.dto.place.PlaceReadDto;
 import com.example.demomodsen.mapper.place.PlaceCreateEditMapper;
 import com.example.demomodsen.mapper.place.PlaceReadMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

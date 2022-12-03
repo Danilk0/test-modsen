@@ -2,8 +2,6 @@ version: '3.3'
 services:
   postgres:
     image: postgres:14.1
-    ports:
-      - 5435:5432
     restart: always
     environment:
       - POSTGRES_PASSWORD=root
@@ -11,14 +9,14 @@ services:
       - POSTGRES_DB=modsen
   app:
     image: app
+    ports:
+      - 8080:8080
     build:
       context: .
     depends_on:
       - postgres
-    ports:
-      - 8070:8080
     restart: always
     environment:
-      - DB_URL=jdbc:postgresql://localhost:5435/modsen
+      - DB_URL=jdbc:postgresql://postgres:5432/modsen
       - DB_USERNAME=root
       - DB_PASSWORD=root

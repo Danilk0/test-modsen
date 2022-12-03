@@ -1,4 +1,7 @@
 package com.example.demomodsen.dto.place;
 
-public record PlaceCreateEditDto( String address) {
+import javax.validation.constraints.Size;
+
+public record PlaceCreateEditDto( @Size(max = 64)
+                                  String address) {
 }

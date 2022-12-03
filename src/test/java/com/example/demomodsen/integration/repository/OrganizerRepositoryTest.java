@@ -1,13 +1,11 @@
-package com.example.demomodsen.integration.database.repository;
+package com.example.demomodsen.integration.repository;
 
-import com.example.demomodsen.database.entity.Event;
 import com.example.demomodsen.database.entity.Organizer;
 import com.example.demomodsen.database.repository.OrganizerRepository;
 import com.example.demomodsen.integration.IntegrationTestBase;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +23,7 @@ class OrganizerRepositoryTest extends IntegrationTestBase {
     }
 
     @Test
-    void save() {
+    void checkOrganizerSaving() {
         Organizer organizer= new Organizer();
         organizer.setName("itransition");
 
@@ -34,7 +32,7 @@ class OrganizerRepositoryTest extends IntegrationTestBase {
     }
 
     @Test
-    void delete() {
+    void checkOrganizerRemoving() {
         Optional<Organizer> maybeOrganizer = organizerRepository.findById(1);
         assertTrue(maybeOrganizer.isPresent());
         maybeOrganizer.ifPresent(event-> organizerRepository.delete(1));
@@ -42,7 +40,7 @@ class OrganizerRepositoryTest extends IntegrationTestBase {
     }
 
     @Test
-    void update() {
+    void checkOrganizerEditing() {
         Organizer organizer= new Organizer();
         organizer.setId(1);
         organizer.setName("itransition");
@@ -57,7 +55,7 @@ class OrganizerRepositoryTest extends IntegrationTestBase {
     }
 
     @Test
-    void findById() {
+    void checkSearchOrganizerById() {
         Optional<Organizer> actualResult = (organizerRepository.findById(1));
         assertTrue(actualResult.isPresent());
         actualResult.ifPresent(result -> {
@@ -66,7 +64,7 @@ class OrganizerRepositoryTest extends IntegrationTestBase {
     }
 
     @Test
-    void findAll() {
+    void checkSearchAllOrganizers() {
         List<Organizer> organizers = organizerRepository.findAll();
         assertThat(organizers).hasSize(4);
     }

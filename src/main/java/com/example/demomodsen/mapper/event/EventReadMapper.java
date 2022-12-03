@@ -8,7 +8,6 @@ import com.example.demomodsen.mapper.Mapper;
 import com.example.demomodsen.mapper.organizer.OrganizerReadMapper;
 import com.example.demomodsen.mapper.place.PlaceReadMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;

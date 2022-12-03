@@ -1,12 +1,13 @@
 package com.example.demomodsen.http.controller;
+
 import com.example.demomodsen.dto.place.PlaceCreateEditDto;
 import com.example.demomodsen.dto.place.PlaceReadDto;
 import com.example.demomodsen.service.PlaceService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -31,19 +32,18 @@ public class PlaceRestController {
     public PlaceReadDto findById(@PathVariable("id") Integer id) {
         return placeService.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public PlaceReadDto create(@RequestBody PlaceCreateEditDto placeCreateEditDto) {
-        return placeService.create(placeCreateEditDto);
+    public PlaceReadDto create(@Validated @RequestBody PlaceCreateEditDto createDto) {
+        return placeService.create(createDto);
     }
 
     @PutMapping("/{id}")
     public PlaceReadDto update(@PathVariable("id") Integer id,
-                               @RequestBody PlaceCreateEditDto placeCreateEditDto) {
-        return placeService.update(id, placeCreateEditDto)
+                               @Validated @RequestBody PlaceCreateEditDto editDto) {
+        return placeService.update(id, editDto)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 

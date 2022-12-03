@@ -1,4 +1,8 @@
 package com.example.demomodsen.dto.organizer;
 
-public record OrganizerCreateEditDto(String name) {
+
+import javax.validation.constraints.Size;
+
+public record OrganizerCreateEditDto( @Size(max = 64)
+                                      String name) {
 }

@@ -6,7 +6,6 @@ import com.example.demomodsen.dto.organizer.OrganizerReadDto;
 import com.example.demomodsen.mapper.organizer.OrganizerCreateEditMapper;
 import com.example.demomodsen.mapper.organizer.OrganizerReadMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

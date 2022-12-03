@@ -1,12 +1,13 @@
 package com.example.demomodsen.http.controller;
+
 import com.example.demomodsen.dto.organizer.OrganizerCreateEditDto;
 import com.example.demomodsen.dto.organizer.OrganizerReadDto;
 import com.example.demomodsen.service.OrganizerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -35,14 +36,14 @@ public class OrganizerRestController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public OrganizerReadDto create(@RequestBody OrganizerCreateEditDto organizerCreateEditDto) {
-        return organizerService.create(organizerCreateEditDto);
+    public OrganizerReadDto create(@Validated @RequestBody OrganizerCreateEditDto createDto) {
+        return organizerService.create(createDto);
     }
 
     @PutMapping("/{id}")
     public OrganizerReadDto update(@PathVariable("id") Integer id,
-                               @RequestBody OrganizerCreateEditDto organizerCreateEditDto) {
-        return organizerService.update(id, organizerCreateEditDto)
+                                   @Validated @RequestBody OrganizerCreateEditDto editDto) {
+        return organizerService.update(id, editDto)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 

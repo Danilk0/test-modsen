@@ -1,6 +1,5 @@
-package com.example.demomodsen.integration.database.repository;
+package com.example.demomodsen.integration.repository;
 
-import com.example.demomodsen.database.entity.Organizer;
 import com.example.demomodsen.database.entity.Place;
 import com.example.demomodsen.database.repository.PlaceRepository;
 import com.example.demomodsen.integration.IntegrationTestBase;
@@ -23,7 +22,7 @@ class PlaceRepositoryTest extends IntegrationTestBase {
     }
 
     @Test
-    void save() {
+    void checkPlaceSaving() {
         Place place= new Place();
         place.setAddress("test");
 
@@ -32,7 +31,7 @@ class PlaceRepositoryTest extends IntegrationTestBase {
     }
 
     @Test
-    void delete() {
+    void checkPlaceRemoving() {
         Optional<Place> maybePlace = placeRepository.findById(1);
         assertTrue(maybePlace.isPresent());
         maybePlace.ifPresent(place -> placeRepository.delete(place.getId()));
@@ -40,7 +39,7 @@ class PlaceRepositoryTest extends IntegrationTestBase {
     }
 
     @Test
-    void update() {
+    void checkPlaceEditing() {
         Place place= new Place();
         place.setId(1);
         place.setAddress("test");
@@ -54,7 +53,7 @@ class PlaceRepositoryTest extends IntegrationTestBase {
     }
 
     @Test
-    void findById() {
+    void checkSearchingPlaceById() {
         Optional<Place> actualResult = (placeRepository.findById(1));
         assertTrue(actualResult.isPresent());
         actualResult.ifPresent(result -> {
@@ -63,7 +62,7 @@ class PlaceRepositoryTest extends IntegrationTestBase {
     }
 
     @Test
-    void findAll(){
+    void checkSearchingAllPlaces(){
         List<Place> places = placeRepository.findAll();
         assertThat(places).hasSize(2);
     }

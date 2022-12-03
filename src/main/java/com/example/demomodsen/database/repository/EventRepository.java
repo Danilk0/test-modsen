@@ -1,10 +1,8 @@
 package com.example.demomodsen.database.repository;
 
 import com.example.demomodsen.database.entity.Event;
-import com.example.demomodsen.database.entity.QEvent;
 import com.example.demomodsen.database.querydsl.QPredicates;
 import com.example.demomodsen.dto.EventFilter;
-import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.jpa.impl.JPAQuery;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +17,9 @@ import java.util.Optional;
 
 import static com.example.demomodsen.database.entity.QEvent.event;
 
+
 @Repository
-public class EventRepository extends HibernateDaoSupport implements CrudRepository<Integer,Event>, EventFilterRepository{
+public class EventRepository extends HibernateDaoSupport implements CrudRepository<Integer, Event>, EventFilterRepository{
 
     @Autowired
     public void setSessionFactory(@Qualifier("sessionFactory") LocalSessionFactoryBean sessionFactory){

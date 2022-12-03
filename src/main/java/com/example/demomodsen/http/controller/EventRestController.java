@@ -1,13 +1,14 @@
 package com.example.demomodsen.http.controller;
-import com.example.demomodsen.dto.event.EventCreateEditDto;
+
 import com.example.demomodsen.dto.EventFilter;
+import com.example.demomodsen.dto.event.EventCreateEditDto;
 import com.example.demomodsen.dto.event.EventReadDto;
 import com.example.demomodsen.service.EventService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -18,15 +19,9 @@ import static org.springframework.http.ResponseEntity.notFound;
 
 @RequiredArgsConstructor
 @RestController
-public class EventRestController{
+public class EventRestController {
 
     private final EventService eventService;
-
-
-//    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-//    public List<EventReadDto> findAll() {
-//        return eventService.findAll();
-//    }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<EventReadDto> findAll(EventFilter filter) {
@@ -42,14 +37,14 @@ public class EventRestController{
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public EventReadDto create(@RequestBody EventCreateEditDto eventCreateEditDto) {
-        return eventService.create(eventCreateEditDto);
+    public EventReadDto create(@Validated @RequestBody EventCreateEditDto createDto) {
+        return eventService.create(createDto);
     }
 
     @PutMapping("/{id}")
     public EventReadDto update(@PathVariable("id") Integer id,
-                               @RequestBody EventCreateEditDto eventCreateEditDto) {
-        return eventService.update(id, eventCreateEditDto)
+                               @RequestBody @Validated EventCreateEditDto editDto) {
+        return eventService.update(id, editDto)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
